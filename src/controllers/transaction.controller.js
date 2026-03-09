@@ -154,8 +154,6 @@ return res.status(200).json({
 
 export async function createInitialFunds(req , res){
 
-    console.log(req.body)
-    
     const {toAccount , amount , idempotencyKey} = req.body
     if(!toAccount || !amount || !idempotencyKey){
         return res.status(400).json({
