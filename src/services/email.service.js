@@ -53,3 +53,31 @@ We're excited to have you on board!\n\nBest regards,\nThe Backend Ledger Team`;
 
   await sendEmail(userEmail, subject, text, html);
 }
+
+export async function sendTransactionEmail(userEmail , name, amount , toAccount){
+  const subject = "Transaction Alert from backend ledger!";
+  const text = `Hello ${name},\n\nYou have received a transaction of amount ${amount} to your account ${toAccount}.
+Please check your account for more details.\n\nBest regards,\nThe Backend Ledger Team`;
+
+  const html = `
+    <p>Hello ${name},</p>
+    <p>You have received a transaction of amount ${amount} to your account ${toAccount}. Please check your account for more details.</p>
+    <p>Best regards,<br>The Backend Ledger Team</p>
+  `;
+
+  await sendEmail(userEmail, subject, text, html);
+}
+
+export async function sendtransactionFailureEmail(userEmail , name, amount , toAccount){
+  const subject = "Transaction Failure Alert from backend ledger!";
+  const text = `Hello ${name},\n\nWe regret to inform you that a transaction of amount ${amount} to your account ${toAccount} has failed.
+Please check your account for more details or contact support.\n\nBest regards,\nThe Backend Ledger Team`;
+
+  const html = `
+    <p>Hello ${name},</p>
+    <p>We regret to inform you that a transaction of amount ${amount} to your account ${toAccount} has failed. Please check your account for more details or contact support.</p>
+    <p>Best regards,<br>The Backend Ledger Team</p>
+  `;
+
+  await sendEmail(userEmail, subject, text, html);
+}

@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { authmiddleware } from "../middlewares/auth.middleware.js";
+import { authmiddleware, authSystemUserMiddleware } from "../middlewares/auth.middleware.js";
+import { createInitialFunds, createTransaction } from "../controllers/transaction.controller.js";
 
 const transactionRoutes = Router()
 
@@ -9,4 +10,15 @@ const transactionRoutes = Router()
  * - Protected Route
  */
 
-transactionRoutes.post("/" , authmiddleware)
+transactionRoutes.post("/" , authmiddleware , createTransaction)
+
+/**
+ * POST /api/transactions/system/inirtial-funds
+ * - Create initial funds for a system user
+ */
+
+transactionRoutes.post("/system/initial-funds" , authSystemUserMiddleware , createInitialFunds)
+
+
+
+export default transactionRoutes
