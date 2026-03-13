@@ -1,13 +1,22 @@
 import jwt from "jsonwebtoken";
 import userModel from "../models/user.model.js";
+import tokenBlacklistModel from "../models/blackList.model.js";
 
 export async function authmiddleware(req , res , next){
 
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1]
 
+
     if(!token){
         return res.status(401).json({
             message: "Unauthorized access, token is missing"
+        })
+    }
+
+    const isBlacklistedToken = await tokenBlacklistModel.findOne({token})
+    if (isBlacklistedToken){
+        return res.status(401).json({
+            message: "Unauthorized access, token is blacklisted"
         })
     }
 
@@ -40,6 +49,13 @@ export async function authSystemUserMiddleware(req , res , next){
     if(!token){
         return res.status(401).json({
             message: "Unauthorized access, token is missing"
+        })
+    }
+
+       const isBlacklistedToken = await tokenBlacklistModel.findOne({token})
+    if (isBlacklistedToken){
+        return res.status(401).json({
+            message: "Unauthorized access, token is blacklisted"
         })
     }
 

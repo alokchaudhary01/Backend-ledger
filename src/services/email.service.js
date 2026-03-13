@@ -34,7 +34,7 @@ export const sendEmail = async (to, subject, text, html) => {
       html,
     });
 
-    console.log('Message sent: %s', info.messageId);
+   
   } catch (error) {
     console.error('Error sending email:', error);
   }
@@ -55,6 +55,7 @@ We're excited to have you on board!\n\nBest regards,\nThe Backend Ledger Team`;
 }
 
 export async function sendTransactionEmail(userEmail , name, amount , toAccount){
+
   const subject = "Transaction Alert from backend ledger!";
   const text = `Hello ${name},\n\nYou have received a transaction of amount ${amount} to your account ${toAccount}.
 Please check your account for more details.\n\nBest regards,\nThe Backend Ledger Team`;
