@@ -17,6 +17,10 @@ app.use(express.json())
 app.use(cookieParser())
 
 // Use Routes
+app.get("/" , (req,res)=>{
+    res.send("ledger api is running")
+})
+
 
 app.use("/api/auth", authRouter)
 app.use("/api/accounts", accountRouter)
